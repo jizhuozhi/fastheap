@@ -71,11 +71,8 @@ func (h *Heap) ensureIncrement() {
 }
 
 func (h *Heap) ensureDecrement() {
-	if h.size*2 < cap(h.elements) {
+	if minCap < cap(h.elements) && h.size*2 < cap(h.elements) {
 		newCap := cap(h.elements) / 2
-		if newCap < minCap {
-			newCap = minCap
-		}
 		oldElements := h.elements
 		h.elements = make([]interface{}, newCap)
 		copy(h.elements, oldElements)
